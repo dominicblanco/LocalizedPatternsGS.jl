@@ -88,5 +88,5 @@ DOI : [10.5281/zenodo.10967034](https://doi.org/10.5281/zenodo.10967034)
 
 You can contact us at :
 
-matthieu.cadiot@mail.mcgill.ca
+matthieu.cadiot@mail.mcgill.ca,
 dominic.blanco@mail.mcgill.ca
