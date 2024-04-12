@@ -34,7 +34,7 @@ $$\Delta u_2 - \lambda_2 u_2 + (\lambda_2 \lambda_1 - 1)u_1 = 0$$
 is known to have localized solutions on $\mathbb{R}^2$ that vanish at infinity. These solutions are called localized patterns (see [[1]](https://arxiv.org/abs/2302.12877) for an introduction to the subject). We perform the analysis to prove these patterns in Section 4 of [[1]](To appear).
 
 In the case $\lambda_1 \lambda_2 = 1$, the system reduces to a scalar equation
-$$\lambda_1 \Delta u_1 - u_1 + (1 - \lambda_1 u_1)u_1^2$$
+$$\lambda_1 \Delta u_1 - u_1 + (1 - \lambda_1 u_1)u_1^2 = 0$$
 which is also known to have localized patterns. We perform the analysis to prove these patterns in Section 5 of [[1]](To appear).
 
 ## Proof of a branch of periodic solutions limiting a localized pattern
