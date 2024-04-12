@@ -44,7 +44,7 @@ In Section 4.4 in [[1]](To appear), we prove that, under the condition (79) in T
 We provide as well candidate solutions for the proofs, which are given in the files U0_spikeaway.jld2, U0_ring.jld2, and U0_leaf.jld2. These correspond to the sequence $U_0$ in Section 3.2 representing the approximate solution $u_0$. In particular, $U_0$ has already been projected in the set of sequences representing trace zero functions (see Section 3.2). Consequently, the Fourier series associated to $U_0$ represents a smooth function on $\mathbb{R}^2$ with compact support on a square $\Omega_0$. In the scalar case, the approximate solution is computed in the code using a Newton method.
 
 Given these approximate solution, LocalizedPatternsGS.jl provides the explicit computation of the bounds in Lemmas 4.3, 4.5, and 4.6. It also provides a value for $r_0$ where the proof is successful. In particular, the theorem states that there exists a smooth curve 
-$$\{\tilde{u}(q) : q \in [d,\infty]\} \subset C^\infty(\mathbb{R}^2) \times C^\infty(\mathbb{R}^2)$$
+$$\{\tilde{\mathbf{u}}(q) : q \in [d,\infty]\} \subset C^\infty(\mathbb{R}^2) \times C^\infty(\mathbb{R}^2)$$
 such that $\tilde{u}(q)$ is a periodic solution to the Gray-Scott system of PDEs with period $2q$ in both variables.  In particular, $\tilde{u}(\infty)$ is a localized pattern on $\mathbb{R}^2.$ Finally, the value of $r_0$ provides a uniform control on the branch of periodic solutions, making the proof constructive. 
 
 Then, the code LocalizedPatternsReducedGS.jl provides the same results for the scalar case. In particular, it computes the bounds in Lemmas 5.3, 5.4, and 5.5. It also provides a value for $s_0$ where the proof is successful. In particular, the theorem states that there exists a smooth curve 
