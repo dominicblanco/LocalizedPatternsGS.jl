@@ -21,7 +21,7 @@ Table of contents:
 
 This Julia code is a complement to the article 
 
-#### [[1]](To appear) : "The 2D Gray-Scott model: constructive proofs of existence of stationary localized patterns", M. Cadiot and D. Blanco, [ArXiv Link](To appear).
+#### [[1]](https://arxiv.org/abs/2404.08529) : "The 2D Gray-Scott model: constructive proofs of existence of stationary localized patterns", M. Cadiot and D. Blanco, [ArXiv Link](https://arxiv.org/abs/2404.08529).
 
 It provides the necessary rigorous computations of the bounds presented along the paper. The computations are performed using the package [IntervalArithmetic](https://github.com/JuliaIntervals/IntervalArithmetic.jl). The mathematical objects (spaces, sequences, operators,...) are built using the package [RadiiPolynomial](https://github.com/OlivierHnt/RadiiPolynomial.jl) in combination with the add on [D4Fourier](https://github.com/dominicblanco/D4Fourier.jl)
 
