@@ -13,6 +13,7 @@
 using RadiiPolynomial, IntervalArithmetic, IntervalLinearAlgebra, LinearAlgebra, JLD2
 
 # Needed additional sequence structures for RadiiPolynomial (see Section 6)
+# You can download this file from Github and put it in the same folder as this one. Then, it will include automatically.
 include("D4Fourier.jl")
 
 #####################################################################################################################################################################
@@ -209,17 +210,17 @@ function _char_1D_boundary_coeffs(N,f,d)
 end
 
 # Computes the function needed to take the convolution with ∂ₓ₁V₁ᴺ
-# We denote by (Ṽⱼ)ₘ = |m̃₁| (Vⱼᴺ)ₘ 
-function _Ṽⱼ_coeffs(Vⱼᴺ)
+# We denote by (Ṽⱼ)ₘ = |m̃₁| (Vⱼᴺ)ₘ 
+function _Ṽⱼ_coeffs(Vⱼᴺ)
     N = order(Vⱼᴺ)[1]
     f = frequency(Vⱼᴺ)[1]
-    Ṽⱼ = Sequence(CosFourier(N,f)⊗CosFourier(N,f), interval.(big.(zeros((N+1)^2))))
+    Ṽⱼ = Sequence(CosFourier(N,f)⊗CosFourier(N,f), interval.(big.(zeros((N+1)^2))))
     for n₁ = 0:N
         for n₂ = 0:N
-            Ṽⱼ[(n₁,n₂)] = abs(n₁)*f*Vⱼᴺ[(max(n₁,n₂),min(n₁,n₂))]
+            Ṽⱼ[(n₁,n₂)] = abs(n₁)*f*Vⱼᴺ[(max(n₁,n₂),min(n₁,n₂))]
         end
     end
-    return Ṽⱼ
+    return Ṽⱼ
 end
 
 # Checks the conditions of the Radii-Polynomial Theorem 3.1.
@@ -241,7 +242,11 @@ function CAP(𝒴₀,𝒵₁,𝒵₂,r₀)
 end
 
 ################### PROOF OF SOLUTIONS : MAIN CODE #################################################################################################################################################
-setprecision(80)
+# To run the code, click the run button in the terminal.
+# Below is the data for three solutions. To prove one of them, comment the others. 
+# You can write a comment using the # sign. To comment multiple lines, use #= and end the comment with =#.
+# Make sure to download the necessary file that includes the data you wish to prove!
+setprecision(80) #Sets the precision for the proof.
 U₀ = load("U0_leaf","U₀") #Leaf solution
 N₀ = 240    # number of Fourier modes for leaf: 0 ≤ n₂ ≤ n₁ ≤ N₀ for D₄ series
 N = 180     # number of Fourier modes for operators for the leaf.
@@ -250,7 +255,7 @@ d = 22  ; di = interval(d) ; dbig = interval(big(d))   # size of the domain for 
 λ₁ = 0.0566 ; λ₁i = interval(λ₁) ; λ₁big = interval(big(λ₁))
 r₀ = interval(6e-6) # value of r₀ for 𝒵₂
 
-#=U₀ = load("U0_ring","U₀") #Ring solution
+#=U₀ = load("U0_ring","U₀") #Ring solution 
 N₀ = 80   # number of Fourier modes for the ring
 N = 60    # number of Fourier modes for operators for the ring
 setprecision(80)
@@ -450,14 +455,15 @@ print("Computing 𝒵ᵤ₁₁")
 V₁ᴺ_interval = project(V₁_interval,D₄Fourier(2N,π/di))
 V₂ᴺ_interval = project(V₂_interval,D₄Fourier(2N,π/di))
 
-#For spike and ring, use lines 455 through 459
+#For spike and ring, use lines 457 through 461
 E₁V₁ = _conv_small(E₁,V₁ᴺ_interval, 2N)
 _inner_prod_E₁V₁ = abs(coefficients(P2.*V₁ᴺ_interval)'*coefficients(P2.*E₁V₁))
 @show _inner_prod_E₁V₁
 𝒵ᵤ₁₁ = sqrt(interval(2))*C₀f₁₁*(1-exp(-4a₁*di)) * (interval(2π))^(interval(1/4))/a₁^(interval(3/4))*sqrt(Ω₀) *sqrt(_inner_prod_E₁V₁)  
 @show 𝒵ᵤ₁₁
 
-#For the leaf, use lines 462 through 469
+#For the leaf, use lines 465 through 472
+# More specifically, comment lines 457 through 461 and uncommnet lines 465 through 471.
 #=setprecision(80)
 E₁V₁big = _conv_smallbig(E₁big,V₁ᴺbig,2N)
 setprecision(80)
@@ -469,14 +475,15 @@ _inner_prod_E₁V₁big = abs(coefficients(P2big.*V₁ᴺbig)'*coefficients(P2bi
 
 # Computation of the 𝒵ᵤ₁₂ bound, the second quantity defined in Lemma 4.9.
 print("Computing 𝒵ᵤ₁₂")
-# For spike and ring, use lines 473 through 477
+# For spike and ring, use lines 477 through 481
 E₂V₂ = _conv_small(E₂,V₂ᴺ_interval, 2N)
 _inner_prod_E₂V₂ = abs(coefficients(P2.*V₂ᴺ_interval)'*coefficients(P2.*E₂V₂))
 @show _inner_prod_E₂V₂
 𝒵ᵤ₁₂ = sqrt(interval(2))*C₀f₂₂*(interval(1)-exp(-4a₂*di)) * (interval(2π))^(interval(1/4))/a₂^(interval(3/4))*sqrt(Ω₀)*sqrt(_inner_prod_E₂V₂)  
 @show 𝒵ᵤ₁₂
 
-# For the leaf, use lines 480 through 488
+# For the leaf, use lines 485 through 492
+# More specifically, comment lines 477 through 481 and uncomment 485 through 492.
 #=setprecision(80)
 E₂V₂big = _conv_smallbig(E₂big,V₂ᴺbig,2N)
 setprecision(80)
@@ -534,29 +541,29 @@ P4 = interval.([1 ; sqrt(2)*ones(2N)])
 setprecision(80)
 V₁ᴺbig = project(V₁big,D₄Fourier(2N,π/di))
 setprecision(80)
-Ṽ₁big = _Ṽⱼ_coeffs(V₁ᴺbig)
+Ṽ₁big = _Ṽⱼ_coeffs(V₁ᴺbig)
 setprecision(80)
 V₁ᴺdbig = _sequence_on_boundary(V₁ᴺbig)
 
 setprecision(80)
 V₂ᴺbig = project(V₂big,D₄Fourier(2N,π/di))
 setprecision(80)
-Ṽ₂big = _Ṽⱼ_coeffs(V₂ᴺbig)
+Ṽ₂big = _Ṽⱼ_coeffs(V₂ᴺbig)
 setprecision(80)
 V₂ᴺdbig = _sequence_on_boundary(V₂ᴺbig)
 
 char = Interval.(Float64.(inf.(char),RoundDown),Float64.(sup.(char),RoundUp) ) 
 char1D = Interval.(Float64.(inf.(char1D),RoundDown),Float64.(sup.(char1D),RoundUp) ) 
-Ṽ₁_interval = Interval.(Float64.(inf.(Ṽ₁big),RoundDown),Float64.(sup.(Ṽ₁big),RoundUp) ) 
+Ṽ₁_interval = Interval.(Float64.(inf.(Ṽ₁big),RoundDown),Float64.(sup.(Ṽ₁big),RoundUp) ) 
 V₁ᴺd_interval = Interval.(Float64.(inf.(V₁ᴺdbig),RoundDown),Float64.(sup.(V₁ᴺdbig),RoundUp) ) 
-Ṽ₂_interval = Interval.(Float64.(inf.(Ṽ₂big),RoundDown),Float64.(sup.(Ṽ₂big),RoundUp) ) 
+Ṽ₂_interval = Interval.(Float64.(inf.(Ṽ₂big),RoundDown),Float64.(sup.(Ṽ₂big),RoundUp) ) 
 V₂ᴺd_interval = Interval.(Float64.(inf.(V₂ᴺdbig),RoundDown),Float64.(sup.(V₂ᴺdbig),RoundUp) ) 
 
 
 # We now compute each 𝒵ᵤ₂ⱼ bound for  j = 1,2,3. Beginning with 𝒵ᵤ₂₁,
 print("Computing 𝒵ᵤ₂₁")
-charṼ₁ = __conv_small(char,Ṽ₁_interval,2N)
-_boundary_inner_prod∂ₓ₁V₁ = abs(coefficients(P3.*charṼ₁)'*coefficients(P3.*Ṽ₁_interval))
+charṼ₁ = __conv_small(char,Ṽ₁_interval,2N)
+_boundary_inner_prod∂ₓ₁V₁ = abs(coefficients(P3.*charṼ₁)'*coefficients(P3.*Ṽ₁_interval))
 @show _boundary_inner_prod∂ₓ₁V₁
 
 charV₁ = _conv_small(char,V₁ᴺ_interval,2N)
@@ -574,8 +581,8 @@ CV₁ᴺ = sqrt(interval(1/8) * sqrt(_boundary_inner_prod∂ₓ₁V₁)*sqrt(_bo
 
 # Next, we compute 𝒵ᵤ₂₂
 print("Computing 𝒵ᵤ₂₂")
-charṼ₂ = __conv_small(char,Ṽ₂_interval,2N)
-_boundary_inner_prod∂ₓ₁V₂ = abs(coefficients(P3.*charṼ₂)'*coefficients(P3.*Ṽ₂_interval))
+charṼ₂ = __conv_small(char,Ṽ₂_interval,2N)
+_boundary_inner_prod∂ₓ₁V₂ = abs(coefficients(P3.*charṼ₂)'*coefficients(P3.*Ṽ₂_interval))
 @show _boundary_inner_prod∂ₓ₁V₂
 
 charV₂ = _conv_small(char,V₂ᴺ_interval,2N)
@@ -623,7 +630,7 @@ J₃ = project(Multiplication(V₂ᴺV₁ᴺ_interval),fourier,fourier) - DG₁�
 V₂ᴺ²_interval = V₂ᴺ_interval*V₂ᴺ_interval
 J₄ = project(Multiplication(V₂ᴺ²_interval),fourier,fourier) - DG₁₂^2
 
-# Let lᵢⱼₙ = min_{n ∈ J_red(D₄)\Iᴺ} |lᵢⱼ(ñ)|. Then,
+# Let lᵢⱼₙ = min_{n ∈ J_red(D₄)\Iᴺ} |lᵢⱼ(ñ)|. Then,
 l₁₁ₙ = ((interval((N+1)π)/di)^2*λ₁i+interval(1))
 l₂₂ₙ = ((interval((N+1)π)/di)^2+λ₂i)
 l₂₁ₙ = abs(λ₁i*λ₂i-interval(1))
